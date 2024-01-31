@@ -13,7 +13,7 @@
     <img class="backdrop-img" src="./images/vivek-vg-yPlyDFhGwb8-unsplash.jpg" alt="background image">
     <div class="logo-container">
         <div id="logo">
-            <span style="font-size: 80px;">⊛</span>
+            <span>⊛</span>
         </div>
         <span class="logo-text">Wynd</span>
 
@@ -48,11 +48,11 @@
 
                 <div style="float:left;">
                     <label for="password">PASSWORD</label>
-                    <input type="password" name="password" id="password" required pattern="^(?=.*\d)(?=.*[^a-zA-Z0-9\s]).*$">
+                    <input class="error" type="password" name="password" id="password" required pattern="^(?=.*\d)(?=.*[^a-zA-Z0-9\s]).*$">
                 </div>
 
                 <label for="confirm-password">CONFIRM PASSWORD</label>
-                <input type="password" name="confirm-password" id="confirm-password" required>
+                <input class="error" type="password" name="confirm-password" id="confirm-password" required>
             </div>
             <button type="submit">Create Account</button>
         </form>
