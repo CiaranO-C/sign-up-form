@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Unbounded;
+    src: url(./font/Unbounded-VariableFont_wght.ttf);
+}
+
 @keyframes slide-in {
     from {
         transform: translateX(30px);
@@ -70,7 +75,7 @@ body {
     font-size: 0.7vw;
     height: 100vh;
     min-height: 100%;
-    font-family: 'Unbounded', Helvetica, sans-serif;
+    font-family: Unbounded, Helvetica, sans-serif;
 
 }
 
