@@ -1,44 +1,79 @@
-//make nodelist of all inputs
-
-//add blur event listeners to each input element
-
-//on blur event validate user input, if valid remove error colour and messages
-
-//else if invalid add error color and message, add listener for any input which recursively calls the validate func again
 
 const inputs = document.querySelectorAll('input');
 
 inputs.forEach(input => {
     input.addEventListener('blur', event => {
-        validateInput(event.target); //pass input id to function
+        if (event.target.value) {
+            validateInput(event)
+        } else {
+            event.target.style.removeProperty('border-color');
+        }; //pass input id to function
     });
 });
 
-function validateInput(input) {
-console.log('blur fired!');
-    //if input.id is confirm password pass to confirm function, else do below
-    const isValid = validators[input.id].pattern.test(input.value);
+function validateInput(event) {
+    const input = event.target
 
-    if(isValid) {
-        input.style.borderColor = 'green';
-        if(input.nextElementSibling) {
-            const errorMessage = input.nextElementSibling;
-            errorMessage.remove();
-        };
+    input.removeEventListener('input', validateInput);
+    input.addEventListener('input', validateInput);
+
+
+    if (input.id === 'confirm-password') {
+        passwordMatch(input);
+
     } else {
-        input.style.borderColor = 'red';
+        const isValid = validators[input.id].pattern.test(input.value);
 
-        if(!input.nextElementSibling) { 
-            const errorMessage = document.createElement('p');
-            errorMessage.textContent = validators[input.id].error;
-            input.parentNode.appendChild(errorMessage);
+
+
+        if (isValid) {
+            input.style.borderColor = 'green';
+            if (input.nextElementSibling) {
+                const errorMessage = input.nextElementSibling;
+                errorMessage.remove();
+            };
+        } else if (!input.value) {
+            input.style.removeProperty('border-color');
+
+            if (input.nextElementSibling) {
+                input.nextElementSibling.remove();
+            };
+        } else {
+            input.style.borderColor = 'red';
+
+            if (!input.nextElementSibling && input.value) {
+                const errorMessage = document.createElement('p');
+                errorMessage.textContent = validators[input.id].error;
+                input.parentNode.appendChild(errorMessage);
+            };
         };
     };
+};
 
+function passwordMatch(pass2) {
+    const pass1 = document.getElementById('password').value;
+
+    if (pass1 === pass2.value) {
+        pass2.style.borderColor = 'green';
+    } else if (!pass2.value) {
+        pass2.style.removeProperty('border-color');
+
+        if (pass2.nextElementSibling) {
+            pass2.nextElementSibling.remove();
+        };
+    } else {
+        pass2.style.borderColor = 'red';
+
+        if (!pass2.nextElementSibling && pass2.value) {
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = 'Passwords do not match';
+            pass2.parentNode.appendChild(errorMessage);
+        };
+    };
 };
 
 const validators = {
-    'first-name': { 
+    'first-name': {
         pattern: /^[a-zA-Z]+$/,
         error: 'Must contain only letters',
     },
