@@ -86,7 +86,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: end;
-    text-align: end;
     position: relative;
     cursor: default;
 
@@ -173,14 +172,8 @@ legend {
 .inputs div {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
-
-
-/*input,
-label {
-    display: block;
-    margin-right: 80px;
-}*/
 
 label {
     opacity: 0;
@@ -204,6 +197,13 @@ input {
     margin-right: 35px;
 }
 
+input::placeholder {
+    color: rgb(220, 220, 220);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.8em;
+}
+
+
 input:hover {
     border-color: rgb(201, 235, 255);
 }
@@ -222,7 +222,7 @@ input:focus:valid {
 
 button {
     background-color: rgb(66, 90, 200);
-    color: rgb(227, 230, 255);
+    color: rgb(255, 255, 255);
 
     border: 4px solid rgb(66, 90, 200);
     border-radius: 20px;
@@ -262,8 +262,8 @@ a:hover {
 }
 
 input+p {
-    font-size: 0.3em;
+    font-size: 0.6em;
+    color: rgb(255, 29, 29);
+    padding-left: 3px;
     font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-    margin-bottom: -20px;
 }

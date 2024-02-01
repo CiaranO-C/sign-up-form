@@ -50,24 +50,32 @@ function validateInput(event) {
     };
 };
 
-function passwordMatch(pass2) {
-    const pass1 = document.getElementById('password').value;
+function passwordMatch(input) {
+    const password = document.getElementById('password').value;
+    const confirm =  input
 
-    if (pass1 === pass2.value) {
-        pass2.style.borderColor = 'green';
-    } else if (!pass2.value) {
-        pass2.style.removeProperty('border-color');
+    if (password === confirm.value) {
+        confirm.style.borderColor = 'green';
 
-        if (pass2.nextElementSibling) {
-            pass2.nextElementSibling.remove();
+        if (input.nextElementSibling) {
+            const errorMessage = input.nextElementSibling;
+            errorMessage.remove();
         };
-    } else {
-        pass2.style.borderColor = 'red';
 
-        if (!pass2.nextElementSibling && pass2.value) {
+    } else if (!confirm.value) {
+        confirm.style.removeProperty('border-color');
+
+        if (confirm.nextElementSibling) {
+            confirm.nextElementSibling.remove();
+        };
+
+    } else {
+        confirm.style.borderColor = 'red';
+
+        if (!confirm.nextElementSibling && confirm.value) {
             const errorMessage = document.createElement('p');
             errorMessage.textContent = 'Passwords do not match';
-            pass2.parentNode.appendChild(errorMessage);
+            confirm.parentNode.appendChild(errorMessage);
         };
     };
 };
@@ -91,6 +99,6 @@ const validators = {
     },
     'password': {
         pattern: /^(?=.*\d)(?=.*[^a-zA-Z0-9\s]).*$/,
-        error: 'Must contain a number and special character',
+        error: 'Contains number and special character',
     },
 };
