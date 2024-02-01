@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    
     <img class="backdrop-img" src="./images/vivek-vg-yPlyDFhGwb8-unsplash.jpg" alt="background image">
     <div class="logo-container">
         <div id="logo">
@@ -20,7 +21,8 @@
     </div>
     <div class="content-container">
         <div class="header">
-            <p>It's our mission to supply reliable energy that doesn't cost the planet. Now that is something you can get behind! <br> 
+            <p>It's our mission to supply reliable energy that doesn't cost the planet. Now that is something you can
+                get behind! <br>
                 The future is <i>renewable</i>. The future is <b>Wynd</b>.</p>
 
             <p style="font-weight: 600;">Sign up <i>now</i> to get started.</p>
@@ -30,29 +32,38 @@
             <div class="input-wrapper">
                 <legend>Let's do this!</legend>
 
-                <div style="float:left;">
-                    <label for="first-name">FIRST NAME</label>
-                    <input type="text" id="first-name" name="first-name" required minlength="2" pattern="[A-Za-z]+">
+                <div class="inputs">
+                    <div style="float:left;">
+                        <label for="first-name">FIRST NAME</label>
+                        <input type="text" id="first-name" name="first-name" required minlength="2" pattern="[A-Za-z]+">
+                    </div>
+
+                    <div>
+                        <label for="last-name">LAST NAME</label>
+                        <input type="text" id="last-name" name="last-name" required minlength="2" pattern="[A-Za-z]+">
+                    </div>
+
+                    <div style="float:left;">
+                        <label for="email">EMAIL</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+
+                    <div>
+                        <label for="phone">PHONE NUMBER</label>
+                        <input type="tel" name="phone" id="phone" pattern="^\+\d{1,14}$">
+                    </div>
+
+                    <div style="float:left;">
+                        <label for="password">PASSWORD</label>
+                        <input class="error" type="password" name="password" id="password" required
+                            pattern="^(?=.*\d)(?=.*[^a-zA-Z0-9\s]).*$">
+                    </div>
+
+                    <div>
+                        <label for="confirm-password">CONFIRM PASSWORD</label>
+                        <input class="error" type="password" name="confirm-password" id="confirm-password" required>
+                    </div>
                 </div>
-
-                <label for="last-name">LAST NAME</label>
-                <input type="text" id="last-name" name="last-name" required minlength="2" pattern="[A-Za-z]+">
-
-                <div style="float:left;">
-                    <label for="user-email">EMAIL</label>
-                    <input type="email" name="user-email" id="user-email" required>
-                </div>
-
-                <label for="phone">PHONE NUMBER</label>
-                <input type="tel" name="phone" id="phone" pattern="^\+\d{1,14}$">
-
-                <div style="float:left;">
-                    <label for="password">PASSWORD</label>
-                    <input class="error" type="password" name="password" id="password" required pattern="^(?=.*\d)(?=.*[^a-zA-Z0-9\s]).*$">
-                </div>
-
-                <label for="confirm-password">CONFIRM PASSWORD</label>
-                <input class="error" type="password" name="confirm-password" id="confirm-password" required>
             </div>
             <button type="submit">Create Account</button>
         </form>
