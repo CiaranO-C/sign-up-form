@@ -7,13 +7,41 @@ inputs.forEach(input => {
             validateInput(event)
         } else {
             event.target.style.removeProperty('border-color');
-        }; //pass input id to function
+        };
     });
 });
 
-function validateInput(event) {
-    const input = event.target
+const validators = {
+    'first-name': {
+        pattern: /^[a-zA-Z]+$/,
+        errorMessage: 'Must contain only letters',
+    },
+    'last-name': {
+        pattern: /^[a-zA-Z]{2,}$/,
+        errorMessage: 'Must contain only letters',
+    },
+    'email': {
+        pattern: /^\w+@\w+\.\w+$/,
+        errorMessage: 'Enter valid email',
+    },
+    'phone': {
+        pattern: /^\+\d{1,14}$/,
+        errorMessage: 'Enter valid number with country code',
+    },
+    'password': {
+        pattern: /^(?=.*\d)(?=.*[^a-zA-Z0-9\s]).*$/,
+        errorMessage: 'Contains number and special character',
+    },
+    'confirm-password': {
+        errorMessage: 'Password does not match',
+    },
+};
 
+
+function validateInput(event) {
+    const input = event.target;
+
+    //prevents multiple listeners from being applied to element
     input.removeEventListener('input', validateInput);
     input.addEventListener('input', validateInput);
 
@@ -23,82 +51,43 @@ function validateInput(event) {
 
     } else {
         const isValid = validators[input.id].pattern.test(input.value);
+        
+        colorBorder(input, isValid);
+        handleError(input, isValid);
+    };
+};
 
 
+function handleError(input, isValid) {
+    const error = input.nextElementSibling;
 
-        if (isValid) {
-            input.style.borderColor = 'green';
-            if (input.nextElementSibling) {
-                const errorMessage = input.nextElementSibling;
-                errorMessage.remove();
-            };
-        } else if (!input.value) {
-            input.style.removeProperty('border-color');
-
-            if (input.nextElementSibling) {
-                input.nextElementSibling.remove();
-            };
-        } else {
-            input.style.borderColor = 'red';
-
-            if (!input.nextElementSibling && input.value) {
-                const errorMessage = document.createElement('p');
-                errorMessage.textContent = validators[input.id].error;
-                input.parentNode.appendChild(errorMessage);
-            };
+    if (isValid || !input.value) {
+        if (error) error.remove();
+    } else {
+        if (!error) {
+            const errorMsg = document.createElement('p');
+            errorMsg.textContent = validators[input.id].errorMessage;
+            input.parentNode.appendChild(errorMsg);
         };
     };
 };
+
+
+function colorBorder(input, isValid) {
+    if (isValid) {
+        input.style.borderColor = 'green';
+    } else {
+        (input.value) ? input.style.borderColor = 'red' : input.style.removeProperty('border-color');
+    };
+};
+
 
 function passwordMatch(input) {
+    const confirm = input
     const password = document.getElementById('password').value;
-    const confirm =  input
+    const isValid = confirm.value === password;
 
-    if (password === confirm.value) {
-        confirm.style.borderColor = 'green';
-
-        if (input.nextElementSibling) {
-            const errorMessage = input.nextElementSibling;
-            errorMessage.remove();
-        };
-
-    } else if (!confirm.value) {
-        confirm.style.removeProperty('border-color');
-
-        if (confirm.nextElementSibling) {
-            confirm.nextElementSibling.remove();
-        };
-
-    } else {
-        confirm.style.borderColor = 'red';
-
-        if (!confirm.nextElementSibling && confirm.value) {
-            const errorMessage = document.createElement('p');
-            errorMessage.textContent = 'Passwords do not match';
-            confirm.parentNode.appendChild(errorMessage);
-        };
-    };
+    colorBorder(input, isValid);
+    handleError(input, isValid);
 };
 
-const validators = {
-    'first-name': {
-        pattern: /^[a-zA-Z]+$/,
-        error: 'Must contain only letters',
-    },
-    'last-name': {
-        pattern: /^[a-zA-Z]{2,}$/,
-        error: 'Must contain only letters',
-    },
-    'email': {
-        pattern: /^\w+@\w+\.\w+$/,
-        error: 'Enter valid email',
-    },
-    'phone': {
-        pattern: /^\+\d{1,14}$/,
-        error: 'Enter valid number with country code',
-    },
-    'password': {
-        pattern: /^(?=.*\d)(?=.*[^a-zA-Z0-9\s]).*$/,
-        error: 'Contains number and special character',
-    },
-};

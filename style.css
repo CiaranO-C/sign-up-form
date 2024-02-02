@@ -1,7 +1,4 @@
-@font-face {
-    font-family: Unbounded;
-    src: url(./font/Unbounded-VariableFont_wght.ttf);
-}
+
 
 @keyframes slide-in {
     from {
@@ -75,7 +72,7 @@ body {
     font-size: 0.7vw;
     height: 100vh;
     min-height: 100%;
-    font-family: Unbounded, Helvetica, sans-serif;
+    font-family: 'Unbounded', Helvetica, sans-serif;
 
 }
 
@@ -148,7 +145,7 @@ body {
 }
 
 div>p+p {
-    margin: 25px 0px 45px 0px;
+    margin: 25px 0px 35px 0px;
 }
 
 .input-wrapper {
@@ -177,7 +174,6 @@ legend {
 .inputs div {
     display: flex;
     flex-direction: column;
-    flex: 1;
 }
 
 label {
@@ -272,3 +268,5 @@ input+p {
     padding-left: 3px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+
